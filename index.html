@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Voting System</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --bg-opacity : 0.15;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: url(https://www.creativefabrica.com/wp-content/uploads/2023/12/23/Electronic-voting-machine-for-election-Graphics-86914255-1.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            position: relative;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-verify {
+            background-color: var(--success-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-verify:hover {
+            background-color: #219653;
+        }
+
+        .btn-candidate {
+            background-color: white;
+            color: var(--dark-color);
+            border: 2px solid var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-candidate:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-a {
+            border-color: #e74c3c;
+        }
+        .btn-a:hover {
+            background-color: #e74c3c;
+        }
+
+        .btn-b {
+            border-color: #2ecc71;
+        }
+        .btn-b:hover {
+            background-color: #2ecc71;
+        }
+
+        .btn-c {
+            border-color: #9b59b6;
+        }
+        .btn-c:hover {
+            background-color: #9b59b6;
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+        }
+
+        .link:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            text-decoration: underline;
+        }
+
+        .status {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status.success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+            display: block;
+        }
+
+        .status.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .voter-id {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Secure Voting System</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="status-message" class="status"></div>
+        
+        <div id="voter-id-display" class="voter-id"></div>
+
+        <div class="card">
+            <h2>Cast Your Vote</h2>
+            
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #555;">
+                Please verify your identity before voting
+            </p>
+            
+            <button onclick="verifyFace()" class="btn btn-verify">Verify Identity with Facial Recognition</button>
+            
+            <div class="candidates">
+                <button onclick="castVote('Candidate A')" class="btn btn-candidate btn-a">Vote for Candidate A</button>
+                <button onclick="castVote('Candidate B')" class="btn btn-candidate btn-b">Vote for Candidate B</button>
+                <button onclick="castVote('Candidate C')" class="btn btn-candidate btn-c">Vote for Candidate C</button>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="/register" class="link">New User? Register Here</a>
+            <a href="/results" class="link">View Live Results</a>
+        </div>
+    </div>
+
+    <script>
+        let voterId = null;
+        const statusMessage = document.getElementById('status-message');
+        const voterIdDisplay = document.getElementById('voter-id-display');
+    
+        function showStatus(message, isSuccess) {
+            statusMessage.textContent = message;
+            statusMessage.className = isSuccess ? 'status success' : 'status error';
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+    
+        function updateVoterIdDisplay(id) {
+            voterIdDisplay.textContent = id ? `Verified Voter ID: ${id}` : '';
+            voterIdDisplay.style.display = id ? 'block' : 'none';
+        }
+    
+        async function verifyFace() {
+            try {
+                statusMessage.style.display = 'none';
+                
+                const res = await fetch('http://127.0.0.1:5001/recognize');
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                
+                const data = await res.json();
+                console.log("Response data:", data);
+    
+                if (data.status === 'success' && data.voter_id) {
+                    voterId = data.voter_id;
+                    sessionStorage.setItem('voterId', voterId);
+                    updateVoterIdDisplay(voterId);
+                    showStatus(`✅ Identity verified!`, true);
+                } else {
+                    showStatus(`❌ ${data.message || "Verification failed"}`, false);
+                }
+            } catch (err) {
+                console.error("Verification error:", err);
+                showStatus("❌ Verification failed. Please try again.", false);
+            }
+        }
+    
+        async function castVote(candidate) {
+            if (!voterId) {
+                showStatus("❌ Please verify your identity first", false);
+                return;
+            }
+    
+            try {
+                const res = await fetch('/cast_vote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ candidate, voter_id: voterId })
+                });
+                
+                const data = await res.json();
+                
+                if (data.status === 'success') {
+                    sessionStorage.removeItem('voterId');
+                    voterId = null;
+                    updateVoterIdDisplay(null);
+                    showStatus(`✅ Vote for ${candidate} recorded!`, true);
+                } else {
+                    showStatus(`❌ ${data.message || "Failed to cast vote"}`, false);
+                }
+            } catch (err) {
+                console.error("Voting error:", err);
+                showStatus("❌ Voting failed. Please try again.", false);
+            }
+        }
+    
+        window.onload = function() {
+            voterId = sessionStorage.getItem('voterId');
+            updateVoterIdDisplay(voterId);
+        };
+    </script>
+</body>
+</html>
