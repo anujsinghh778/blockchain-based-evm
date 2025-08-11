@@ -1,4 +1,4 @@
-import cv2, pickle, numpy as np, os, csv, time
+# import cv2, pickle, numpy as np, os, csv, time
 from sklearn.neighbors import KNeighborsClassifier
 import requests
 
@@ -107,3 +107,5 @@ class FacialRecognizer:
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] Failed to send vote to blockchain: {e}")
             return {"status": "error", "message": "Blockchain vote failed"}
+            # h
+
