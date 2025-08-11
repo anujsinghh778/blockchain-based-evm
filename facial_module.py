@@ -107,7 +107,8 @@ class FacialRecognizer:
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] Failed to send vote to blockchain: {e}")
             return {"status": "error", "message": "Blockchain vote failed"}
-            # hello
+            # hello0
+
 
 
 
